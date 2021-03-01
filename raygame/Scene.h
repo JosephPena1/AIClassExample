@@ -35,4 +35,3 @@ private:
     bool m_started;
     int m_actorCount;
 };
-

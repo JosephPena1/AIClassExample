@@ -66,4 +66,3 @@ void Sprite::draw(MathLibrary::Matrix3 transform)
 
     //DrawRectangleLines(rayPos.x, rayPos.y, getWidth() * 32, getHeight() * 32, RED);
 }
-

@@ -9,4 +9,3 @@ public:
 	void update(float deltatime) override;
 	void debug() override;
 };
-

@@ -8,4 +8,3 @@ public:
 	void update(float deltaTime) override;
 	void onCollision(Actor* other) override;
 };
-

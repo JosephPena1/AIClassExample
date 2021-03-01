@@ -49,4 +49,3 @@ public:
 private:
     Texture2D* m_texture;
 };
-

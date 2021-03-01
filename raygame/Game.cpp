@@ -26,12 +26,15 @@ void Game::start()
 	m_camera->offset = { (float)screenWidth / 2, (float)screenHeight / 2 };
 	m_camera->target = { (float)screenWidth / 2, (float)screenHeight / 2 };
 	m_camera->zoom = 1;
+
 	Player* player = new Player(10, 10, 5, "Images/player.png", 1);
 	Actor* enemy = new Actor(20, 10, 5, "Images/enemy.png", 1);
 	Scene* scene = new Scene();
+
 	scene->addActor(player);
 	scene->addActor(enemy);
 	addScene(scene);
+
 	SetTargetFPS(60);
 }
 
