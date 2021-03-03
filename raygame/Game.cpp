@@ -5,6 +5,7 @@
 #include "SeekBehaviour.h"
 #include "FleeBehaviour.h"
 #include "WanderBehaviour.h"
+#include "PursueBehaviour.h"
 
 bool Game::m_gameOver = false;
 Scene** Game::m_scenes = new Scene*;
@@ -40,11 +41,12 @@ void Game::start()
 	SeekBehaviour* seek = new SeekBehaviour(player, 10);
 	FleeBehaviour* flee = new FleeBehaviour(enemy, 10);
 	WanderBehaviour* wander = new WanderBehaviour(10);
+	PursueBehaviour* pursue = new PursueBehaviour(player, 10);
 
 	//TO DO: implement wander behaviour
 
 	enemy->addBehaviour(wander);
-	enemy2->addBehaviour(flee);
+	enemy2->addBehaviour(pursue);
 
 	//initialize the sene
 	Scene* scene = new Scene();
