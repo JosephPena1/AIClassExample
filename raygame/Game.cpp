@@ -1,6 +1,10 @@
 #include "Game.h"
 #include "raylib.h"
 #include "Player.h"
+#include "Agent.h"
+#include "SeekBehaviour.h"
+#include "FleeBehaviour.h"
+#include "WanderBehaviour.h"
 
 bool Game::m_gameOver = false;
 Scene** Game::m_scenes = new Scene*;
@@ -27,12 +31,26 @@ void Game::start()
 	m_camera->target = { (float)screenWidth / 2, (float)screenHeight / 2 };
 	m_camera->zoom = 1;
 
-	Player* player = new Player(10, 10, 5, "Images/player.png", 1);
-	Actor* enemy = new Actor(20, 10, 5, "Images/enemy.png", 1);
-	Scene* scene = new Scene();
+	//Initialize agents
+	Player* player = new Player(10, 10, 5, "Images/player.png", 5, 5);
+	Agent* enemy = new Agent(20, 10, 1, "Images/enemy.png", 10, 10);
+	Agent* enemy2 = new Agent(10, 10, 1, "Images/enemy.png", 10, 10);
 
+	//create a new steering behaviour and add it to the enemy
+	SeekBehaviour* seek = new SeekBehaviour(player, 10);
+	FleeBehaviour* flee = new FleeBehaviour(enemy, 10);
+	WanderBehaviour* wander = new WanderBehaviour(10);
+
+	//TO DO: implement wander behaviour
+
+	enemy->addBehaviour(wander);
+	enemy2->addBehaviour(flee);
+
+	//initialize the sene
+	Scene* scene = new Scene();
 	scene->addActor(player);
 	scene->addActor(enemy);
+	scene->addActor(enemy2);
 	addScene(scene);
 
 	SetTargetFPS(60);

@@ -12,6 +12,18 @@
     <Filter Include="Textures">
       <UniqueIdentifier>{b5a36503-1ac1-44c6-bd0b-b12682cdd3b9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\AI">
+      <UniqueIdentifier>{426b540c-3f0b-420e-9c55-3efa076eedeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\AI">
+      <UniqueIdentifier>{15596309-a622-4f9a-9da4-753ee85b2602}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Actor">
+      <UniqueIdentifier>{a9a6e43f-3c62-4080-be9d-0fdcadade286}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Actor">
+      <UniqueIdentifier>{4468ac9b-1bea-49f5-bc20-08a7f1c5a812}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -23,17 +35,32 @@
     <ClCompile Include="Scene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Actor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Sprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="SeekBehaviour.cpp">
+      <Filter>Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor.cpp">
+      <Filter>Source Files\Actor</Filter>
     </ClCompile>
     <ClCompile Include="Bullet.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Agent.cpp">
+      <Filter>Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="WanderBehaviour.cpp">
+      <Filter>Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="FleeBehaviour.cpp">
+      <Filter>Source Files\AI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -43,17 +70,38 @@
     <ClInclude Include="Scene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Actor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Sprite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Behaviour.h">
+      <Filter>Header Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="SeekBehaviour.h">
+      <Filter>Header Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="SteeringBehaviour.h">
+      <Filter>Header Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor.h">
+      <Filter>Header Files\Actor</Filter>
+    </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Actor</Filter>
     </ClInclude>
     <ClInclude Include="Bullet.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Agent.h">
+      <Filter>Header Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Header Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="WanderBehaviour.h">
+      <Filter>Header Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="FleeBehaviour.h">
+      <Filter>Header Files\AI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

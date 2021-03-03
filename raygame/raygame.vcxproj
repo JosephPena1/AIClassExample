@@ -147,20 +147,32 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="Agent.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="FleeBehaviour.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SeekBehaviour.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="WanderBehaviour.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
+    <ClInclude Include="Agent.h" />
+    <ClInclude Include="Behaviour.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="FleeBehaviour.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="SeekBehaviour.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="SteeringBehaviour.h" />
+    <ClInclude Include="WanderBehaviour.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Images\bullet.png" />

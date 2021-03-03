@@ -6,5 +6,5 @@ class Agent;
 class Behaviour
 {
 public:
-	virtual void update(Agent* owner, float deltaTime) = 0;
+	virtual void update(Agent* agent, float deltaTime) = 0;
 };
