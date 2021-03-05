@@ -39,12 +39,12 @@ void Agent::update(float deltaTime)
 
 	if (getWorldPosition().x > screenWidth)
 		setWorldPostion(MathLibrary::Vector2{ 0, getWorldPosition().y });
-	else if (getWorldPosition().x < -3)
+	else if (getWorldPosition().x < -2)
 		setWorldPostion(MathLibrary::Vector2{ (float)screenWidth, getWorldPosition().y });
 
 	if (getWorldPosition().y > screenHeight)
 		setWorldPostion(MathLibrary::Vector2{ getWorldPosition().x, 0 });
-	else if (getWorldPosition().y < -3)
+	else if (getWorldPosition().y < -2)
 		setWorldPostion(MathLibrary::Vector2{ getWorldPosition().x, (float)screenHeight });
 
 	//Reset force to be zero

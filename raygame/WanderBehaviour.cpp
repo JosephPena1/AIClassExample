@@ -16,14 +16,20 @@ WanderBehaviour::WanderBehaviour(float seekForce)
 MathLibrary::Vector2 WanderBehaviour::calculateForce(Agent* agent)
 {
 	float radian = 1;
-	float randNum = rand() % 10 + 1;
+
+	//generates two random numbers from -5 to 5
+	float randNum = rand() % 11 + (-5);
+	float randNum2 = rand() % 11 + (-5);
+
 	//sets the center of the circle to be agents current velocity normalised
-	MathLibrary::Vector2 direction = agent->getVelocity().getNormalized();
-	MathLibrary::Vector2 circleCenter = agent->getWorldPosition() + direction * 1;
+	MathLibrary::Vector2 circleCenter = agent->getWorldPosition() + agent->getForward() * agent->getForward().getMagnitude();
+
+	//creates two random variables to make the offset
 	float x = radian * cos(randNum);
-	float y = radian * sin(randNum);
+	float y = radian * sin(randNum2);
 	MathLibrary::Vector2 offset = {x, y};
 
+	//creates a random target in the circle
 	MathLibrary::Vector2 target = circleCenter + offset;
 
 	//Find the direction to move in.

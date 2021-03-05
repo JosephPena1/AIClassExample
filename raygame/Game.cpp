@@ -6,6 +6,8 @@
 #include "FleeBehaviour.h"
 #include "WanderBehaviour.h"
 #include "PursueBehaviour.h"
+#include "EvadeBehaviour.h"
+#include "ArrivalBehaviour.h"
 
 bool Game::m_gameOver = false;
 Scene** Game::m_scenes = new Scene*;
@@ -27,26 +29,26 @@ void Game::start()
 	int screenWidth = 1024;
 	int screenHeight = 760;
 
-	InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
+	InitWindow(screenWidth, screenHeight, "AI BehavioUr");
 	m_camera->offset = { (float)screenWidth / 2, (float)screenHeight / 2 };
 	m_camera->target = { (float)screenWidth / 2, (float)screenHeight / 2 };
 	m_camera->zoom = 1;
 
 	//Initialize agents
-	Player* player = new Player(10, 10, 5, "Images/player.png", 5, 5);
-	Agent* enemy = new Agent(20, 10, 1, "Images/enemy.png", 10, 10);
-	Agent* enemy2 = new Agent(10, 10, 1, "Images/enemy.png", 10, 10);
+	Player* player = new Player(10, 10, 5, "Images/player.png", 6, 6);
+	Agent* enemy = new Agent(20, 15, 1, "Images/enemy.png", 5, 5);
+	Agent* enemy2 = new Agent(10, 10, 1, "Images/enemy.png", 5, 5);
 
 	//create a new steering behaviour and add it to the enemy
-	SeekBehaviour* seek = new SeekBehaviour(player, 10);
-	FleeBehaviour* flee = new FleeBehaviour(enemy, 10);
-	WanderBehaviour* wander = new WanderBehaviour(10);
-	PursueBehaviour* pursue = new PursueBehaviour(player, 10);
+	SeekBehaviour* seek = new SeekBehaviour(player, 5);
+	FleeBehaviour* flee = new FleeBehaviour(enemy, 5);
+	WanderBehaviour* wander = new WanderBehaviour(5);
+	PursueBehaviour* pursue = new PursueBehaviour(enemy, 5);
+	EvadeBehaviour* evade = new EvadeBehaviour(enemy, 5); //I think evade is working?
+	ArrivalBehaviour* arrival = new ArrivalBehaviour(player, 5);
 
-	//TO DO: implement wander behaviour
-
-	enemy->addBehaviour(wander);
-	enemy2->addBehaviour(pursue);
+	enemy->addBehaviour(arrival);
+	enemy2->addBehaviour(wander);
 
 	//initialize the sene
 	Scene* scene = new Scene();
