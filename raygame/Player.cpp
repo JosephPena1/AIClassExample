@@ -17,12 +17,12 @@ void Player::update(float deltatime)
 
     if (getWorldPosition().x > screenWidth)
         setWorldPostion(MathLibrary::Vector2{ 0, getWorldPosition().y });
-    else if (getWorldPosition().x < -2)
+    else if (getWorldPosition().x < -1)
         setWorldPostion(MathLibrary::Vector2{ (float)screenWidth, getWorldPosition().y });
 
     if (getWorldPosition().y > screenHeight)
         setWorldPostion(MathLibrary::Vector2{ getWorldPosition().x, 0 });
-    else if (getWorldPosition().y < -2)
+    else if (getWorldPosition().y < -1)
         setWorldPostion(MathLibrary::Vector2{ getWorldPosition().x, (float)screenHeight });
 
     //Gets the player's input to determine which direction the actor will move on each axis 
@@ -38,6 +38,7 @@ void Player::update(float deltatime)
         Game::getCurrentScene()->addActor(new Bullet(
             getWorldPosition().x, getWorldPosition().y, 2, "Images/bullet.png", 5, getForward() * 5));
 
+    //if Left_Control is held down, set Velocity to the current velocity divided by 2
     if (Game::getKeyDown(KEY_LEFT_CONTROL))
         setVelocity(getVelocity() / 2);
 

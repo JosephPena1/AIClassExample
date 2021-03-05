@@ -35,7 +35,7 @@ void Game::start()
 	m_camera->zoom = 1;
 
 	//Initialize agents
-	Player* player = new Player(10, 10, 5, "Images/player.png", 6, 6);
+	Player* player = new Player(10, 10, 5, "Images/player.png", 4, 4);
 	Agent* enemy = new Agent(20, 15, 1, "Images/enemy.png", 5, 5);
 	Agent* enemy2 = new Agent(10, 10, 1, "Images/enemy.png", 5, 5);
 
@@ -44,10 +44,10 @@ void Game::start()
 	FleeBehaviour* flee = new FleeBehaviour(enemy, 5);
 	WanderBehaviour* wander = new WanderBehaviour(5);
 	PursueBehaviour* pursue = new PursueBehaviour(enemy, 5);
-	EvadeBehaviour* evade = new EvadeBehaviour(enemy, 5); //I think evade is working?
+	EvadeBehaviour* evade = new EvadeBehaviour(enemy, 5);
 	ArrivalBehaviour* arrival = new ArrivalBehaviour(player, 5);
 
-	enemy->addBehaviour(arrival);
+	enemy->addBehaviour(wander);
 	enemy2->addBehaviour(wander);
 
 	//initialize the sene
