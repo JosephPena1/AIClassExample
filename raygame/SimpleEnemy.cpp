@@ -11,7 +11,7 @@ bool SimpleEnemy::checkTargetInSight()
 	MathLibrary::Vector2 direction = (getTarget()->getWorldPosition() - getWorldPosition()).getNormalized();
 
 	//Find the dot product of the enemy's forward and the direction vector
-	MathLibrary::Vector2 dotProd = MathLibrary::Vector2::dotProduct(getForward(), direction);
+	//MathLibrary::Vector2 dotProd = MathLibrary::Vector2::dotProduct(getForward(), direction);
 
 	//Find the angle using the dot product
 

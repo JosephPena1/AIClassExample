@@ -160,6 +160,7 @@
     <ClCompile Include="PursueBehaviour.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SeekBehaviour.cpp" />
+    <ClCompile Include="SimpleEnemy.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="WanderBehaviour.cpp" />
   </ItemGroup>
@@ -178,6 +179,7 @@
     <ClInclude Include="PursueBehaviour.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SeekBehaviour.h" />
+    <ClInclude Include="SimpleEnemy.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SteeringBehaviour.h" />
     <ClInclude Include="WanderBehaviour.h" />

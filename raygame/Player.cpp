@@ -5,7 +5,8 @@
 #include <iostream>
 #include "Bullet.h"
 
-Player::Player(float x, float y, float collisionRadius, const char* spriteFilePath, float maxSpeed, float maxForce) : Agent(x, y, collisionRadius, spriteFilePath, maxSpeed, maxForce)
+Player::Player(float x, float y, float collisionRadius, const char* spriteFilePath, float maxSpeed, float maxForce) 
+    : Character(x, y, collisionRadius, spriteFilePath, maxSpeed, maxForce)
 {
 
 }
@@ -38,11 +39,14 @@ void Player::update(float deltatime)
         Game::getCurrentScene()->addActor(new Bullet(
             getWorldPosition().x, getWorldPosition().y, 2, "Images/bullet.png", 5, getForward() * 5));
 
-    //if Left_Control is held down, set Velocity to the current velocity divided by 2
+    //if Left Control is held down, set Velocity to the current velocity divided by 2
     if (Game::getKeyDown(KEY_LEFT_CONTROL))
         setVelocity(getVelocity() / 2);
 
     Actor::update(deltatime);
+
+    if (getHealth() <= 0)
+        Game::destroy(this);
 }
 
 void Player::debug()
