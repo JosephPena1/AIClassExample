@@ -17,12 +17,12 @@ void Player::update(float deltatime)
 
     if (getWorldPosition().x > screenWidth)
         setWorldPostion(MathLibrary::Vector2{ 0, getWorldPosition().y });
-    else if (getWorldPosition().x < -1)
+    if (getWorldPosition().x < -1)
         setWorldPostion(MathLibrary::Vector2{ (float)screenWidth, getWorldPosition().y });
 
     if (getWorldPosition().y > screenHeight)
         setWorldPostion(MathLibrary::Vector2{ getWorldPosition().x, 0 });
-    else if (getWorldPosition().y < -1)
+    if (getWorldPosition().y < -1)
         setWorldPostion(MathLibrary::Vector2{ getWorldPosition().x, (float)screenHeight });
 
     //Gets the player's input to determine which direction the actor will move on each axis 

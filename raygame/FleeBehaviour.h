@@ -7,7 +7,7 @@ class FleeBehaviour : public SteeringBehaviour
 {
 public:
 	FleeBehaviour();
-	FleeBehaviour(Actor* target, float seekForce = 1);
+	FleeBehaviour(Actor* target, float fleeForce = 1);
 
 	Actor* getTarget() { return m_target; }
 	void setTarget(Actor* target) { m_target = target; }
@@ -18,5 +18,4 @@ public:
 private:
 	//The agent the behaviour is seeking
 	Actor* m_target;
-	float m_seekForce;
 };

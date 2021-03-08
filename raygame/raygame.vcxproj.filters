@@ -53,9 +53,6 @@
     <ClCompile Include="Agent.cpp">
       <Filter>Source Files\AI</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Source Files\AI</Filter>
-    </ClCompile>
     <ClCompile Include="WanderBehaviour.cpp">
       <Filter>Source Files\AI</Filter>
     </ClCompile>
@@ -70,6 +67,12 @@
     </ClCompile>
     <ClCompile Include="ArrivalBehaviour.cpp">
       <Filter>Source Files\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>Source Files\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files\Actor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -103,9 +106,6 @@
     <ClInclude Include="Agent.h">
       <Filter>Header Files\AI</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Header Files\AI</Filter>
-    </ClInclude>
     <ClInclude Include="WanderBehaviour.h">
       <Filter>Header Files\AI</Filter>
     </ClInclude>
@@ -120,6 +120,12 @@
     </ClInclude>
     <ClInclude Include="ArrivalBehaviour.h">
       <Filter>Header Files\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>Header Files\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Header Files\Actor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

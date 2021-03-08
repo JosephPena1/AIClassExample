@@ -150,6 +150,7 @@
     <ClCompile Include="Agent.cpp" />
     <ClCompile Include="ArrivalBehaviour.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Character.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EvadeBehaviour.cpp" />
     <ClCompile Include="FleeBehaviour.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="ArrivalBehaviour.h" />
     <ClInclude Include="Behaviour.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="Character.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EvadeBehaviour.h" />
     <ClInclude Include="FleeBehaviour.h" />

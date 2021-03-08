@@ -1,11 +1,24 @@
 #include "Enemy.h"
+#include "Game.h"
 
-Enemy::Enemy(float x, float y, float collisionRadius, const char* spriteFilePath, Agent* target, float maxSpeed = 1, float maxForce = 1)
+Enemy::Enemy(float x, float y, float collisionRadius, const char* spriteFilePath, Actor* target, float health, float damage, float maxSpeed, float maxForce)
+	: Character(x, y, collisionRadius, spriteFilePath, health, damage, maxSpeed, maxForce)
 {
-	m_target = target;
+	setTarget(target);
 }
 
 void Enemy::update(float deltaTime)
 {
+	Character::update(deltaTime);
 
+	//checks if Enemy is inside the windows boundary
+	if (getWorldPosition().x > Game::getScreenWidth() / 32)
+		setWorldPostion(MathLibrary::Vector2{ 0, getWorldPosition().y });
+	if (getWorldPosition().x < -1)
+		setWorldPostion(MathLibrary::Vector2{ (float)Game::getScreenWidth(), getWorldPosition().y });
+
+	if (getWorldPosition().y > Game::getScreenHeight() / 32)
+		setWorldPostion(MathLibrary::Vector2{ getWorldPosition().x, 0 });
+	if (getWorldPosition().y < -1)
+		setWorldPostion(MathLibrary::Vector2{ getWorldPosition().x, (float)Game::getScreenHeight() });
 }

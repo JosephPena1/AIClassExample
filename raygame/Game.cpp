@@ -13,6 +13,8 @@ bool Game::m_gameOver = false;
 Scene** Game::m_scenes = new Scene*;
 int Game::m_sceneCount = 0;
 int Game::m_currentSceneIndex = 0;
+int Game::m_screenWidth = 1024;
+int Game::m_screenHeight = 720;
 
 
 Game::Game()
@@ -26,28 +28,29 @@ Game::Game()
 
 void Game::start()
 {
-	int screenWidth = 1024;
-	int screenHeight = 760;
+	m_screenWidth = 1024;
+	m_screenHeight = 720;
 
-	InitWindow(screenWidth, screenHeight, "AI BehavioUr");
-	m_camera->offset = { (float)screenWidth / 2, (float)screenHeight / 2 };
-	m_camera->target = { (float)screenWidth / 2, (float)screenHeight / 2 };
+	InitWindow(m_screenWidth, m_screenHeight, "AI BehavioUr");
+	m_camera->offset = { (float)m_screenWidth / 2, (float)m_screenHeight / 2 };
+	m_camera->target = { (float)m_screenWidth / 2, (float)m_screenHeight / 2 };
 	m_camera->zoom = 1;
 
 	//Initialize agents
-	Player* player = new Player(10, 10, 5, "Images/player.png", 4, 4);
-	Agent* enemy = new Agent(20, 15, 1, "Images/enemy.png", 5, 5);
+	Player* player = new Player(10, 10, 5, "Images/player.png", 3, 3);
+	Agent* enemy = new Agent(20, 15, 1, "Images/enemy.png", 15, 15);
 	Agent* enemy2 = new Agent(10, 10, 1, "Images/enemy.png", 5, 5);
 
 	//create a new steering behaviour and add it to the enemy
 	SeekBehaviour* seek = new SeekBehaviour(player, 5);
 	FleeBehaviour* flee = new FleeBehaviour(enemy, 5);
-	WanderBehaviour* wander = new WanderBehaviour(5);
-	PursueBehaviour* pursue = new PursueBehaviour(enemy, 5);
+	WanderBehaviour* wander = new WanderBehaviour(2);
+	PursueBehaviour* pursue = new PursueBehaviour(player, 15);
 	EvadeBehaviour* evade = new EvadeBehaviour(enemy, 5);
-	ArrivalBehaviour* arrival = new ArrivalBehaviour(player, 5);
+	ArrivalBehaviour* arrival = new ArrivalBehaviour(player, 3);
 
-	enemy->addBehaviour(wander);
+	enemy->addBehaviour(pursue);
+	enemy->addBehaviour(arrival);
 	enemy2->addBehaviour(wander);
 
 	//initialize the sene

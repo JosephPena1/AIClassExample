@@ -6,13 +6,13 @@
 ArrivalBehaviour::ArrivalBehaviour()
 {
 	m_target = nullptr;
-	m_seekForce = 1;
+	setForceScale(1);
 }
 
 ArrivalBehaviour::ArrivalBehaviour(Actor* target, float seekForce)
 {
 	m_target = target;
-	m_seekForce = seekForce;
+	setForceScale(seekForce);
 }
 
 MathLibrary::Vector2 ArrivalBehaviour::calculateForce(Agent* agent)
@@ -23,10 +23,10 @@ MathLibrary::Vector2 ArrivalBehaviour::calculateForce(Agent* agent)
 	float distance = desiredVelocity.getMagnitude();
 
 	if (distance < slowingRadius)
-		desiredVelocity = desiredVelocity * m_seekForce * (distance / slowingRadius);
+		desiredVelocity = desiredVelocity * getForceScale() * (distance / slowingRadius);
 
 	else
-		desiredVelocity = desiredVelocity * m_seekForce;
+		desiredVelocity = desiredVelocity * getForceScale();
 
 	//Subtract current velocity from desired velocity to find steering force
 	MathLibrary::Vector2 steeringForce = desiredVelocity - agent->getVelocity();
