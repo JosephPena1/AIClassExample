@@ -9,5 +9,5 @@ Character::Character(float x, float y, float collisionRadius, const char* sprite
 
 void Character::update(float deltatime)
 {
-
+	Agent::update(deltatime);
 }

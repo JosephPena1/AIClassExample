@@ -36,15 +36,18 @@ Agent::Agent(float x, float y, float collisionRadius, const char* spriteFilePath
 void Agent::update(float deltaTime)
 {
 	//checks if Agent is inside the windows boundary
-	if (getWorldPosition().x > Game::getScreenWidth() / 32)
-		setWorldPostion(MathLibrary::Vector2{ 0, getWorldPosition().y });
-	if (getWorldPosition().x < 0)
-		setWorldPostion(MathLibrary::Vector2{ (float)Game::getScreenWidth(), getWorldPosition().y });
+	int screenWidth = Game::getScreenWidth() / 32;
+	int screenHeight = Game::getScreenHeight() / 32;
 
-	if (getWorldPosition().y > Game::getScreenHeight() / 32)
+	if (getWorldPosition().x > screenWidth)
+		setWorldPostion(MathLibrary::Vector2{ 0, getWorldPosition().y });
+	if (getWorldPosition().x < -1)
+		setWorldPostion(MathLibrary::Vector2{ (float)screenWidth, getWorldPosition().y });
+
+	if (getWorldPosition().y > screenHeight)
 		setWorldPostion(MathLibrary::Vector2{ getWorldPosition().x, 0 });
-	if (getWorldPosition().y < 0)
-		setWorldPostion(MathLibrary::Vector2{ getWorldPosition().x, (float)Game::getScreenHeight() });
+	if (getWorldPosition().y < -1)
+		setWorldPostion(MathLibrary::Vector2{ getWorldPosition().x, (float)screenHeight });
 
 	//Reset force to be zero
 	m_force = { 0, 0 };

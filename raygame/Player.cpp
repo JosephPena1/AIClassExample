@@ -13,8 +13,10 @@ Player::Player(float x, float y, float collisionRadius, const char* spriteFilePa
 
 void Player::update(float deltatime)
 {
-    int screenWidth = 35;
-    int screenHeight = 25;
+    //I think inheriting from character messed up some stuff
+
+    int screenWidth = Game::getScreenWidth() / 32;
+    int screenHeight = Game::getScreenHeight() / 32;
 
     if (getWorldPosition().x > screenWidth)
         setWorldPostion(MathLibrary::Vector2{ 0, getWorldPosition().y });
