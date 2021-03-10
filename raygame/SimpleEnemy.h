@@ -33,4 +33,6 @@ private:
 	ArrivalBehaviour* m_arrival;
 	FleeBehaviour* m_flee;
 
+	int m_cooldown;
+
 };

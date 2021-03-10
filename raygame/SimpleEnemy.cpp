@@ -47,14 +47,17 @@ void SimpleEnemy::tag(Actor* other)
 	//Checks to see if the enemy ran into the player
 	if (checkCollision(player))
 	{
-		switch (m_currentState)
+		if (m_cooldown <= 0)
 		{
-		case FLEE:
-			m_currentState = PURSUE;
-			break;
-		case PURSUE:
-			m_currentState = FLEE;
-			break;
+			switch (m_currentState)
+			{
+			case FLEE:
+				m_currentState = PURSUE;
+				break;
+			case PURSUE:
+				m_currentState = FLEE;
+				break;
+			}
 		}
 	}
 }
@@ -110,9 +113,7 @@ void SimpleEnemy::update(float deltaTime)
 	//Create a switch statement for the state machine
 	tag(getTarget());
 
-	int cooldown = 0;
-
-	if (cooldown <= 0)
+	if (m_cooldown <= 0)
 	{
 		switch (m_currentState)
 		{
@@ -121,7 +122,7 @@ void SimpleEnemy::update(float deltaTime)
 			m_pursue->setForceScale(0);
 			m_arrival->setForceScale(0);
 			m_flee->setForceScale(0);
-			cooldown = 10;
+			m_cooldown = 20;
 			break;
 
 		case PURSUE:
@@ -129,7 +130,7 @@ void SimpleEnemy::update(float deltaTime)
 			m_arrival->setForceScale(3);
 			m_wander->setForceScale(0);
 			m_flee->setForceScale(0);
-			cooldown = 10;
+			m_cooldown = 20;
 			break;
 
 		case FLEE:
@@ -137,7 +138,7 @@ void SimpleEnemy::update(float deltaTime)
 			m_pursue->setForceScale(0);
 			m_arrival->setForceScale(0);
 			m_wander->setForceScale(0);
-			cooldown = 10;
+			m_cooldown = 20;
 			break;
 
 		default:
@@ -145,7 +146,7 @@ void SimpleEnemy::update(float deltaTime)
 		}
 	}
 	
-	cooldown--;
+	m_cooldown--;
 	
 	Enemy::update(deltaTime);
 }
