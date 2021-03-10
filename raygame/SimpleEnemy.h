@@ -4,11 +4,14 @@
 enum EnemyState
 {
 	WANDER,
-	SEEK
+	PURSUE,
+	FLEE
 };
 
 class WanderBehaviour;
-class SeekBehaviour;
+class PursueBehaviour;
+class ArrivalBehaviour;
+class FleeBehaviour;
 
 class SimpleEnemy : public Enemy
 {
@@ -16,6 +19,7 @@ public:
 	using Enemy::Enemy;
 	bool checkTargetInSight();
 
+	void tag(Actor* other);
 	void onCollision(Actor* other) override;
 	void start() override;
 	void update(float deltaTime) override;
@@ -25,6 +29,8 @@ public:
 private:
 	EnemyState m_currentState;
 	WanderBehaviour* m_wander;
-	SeekBehaviour* m_seek;
+	PursueBehaviour* m_pursue;
+	ArrivalBehaviour* m_arrival;
+	FleeBehaviour* m_flee;
 
 };
