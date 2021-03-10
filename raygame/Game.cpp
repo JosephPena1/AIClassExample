@@ -38,7 +38,7 @@ void Game::start()
 	m_camera->zoom = 1;
 
 	//Initialize agents
-	Player* player = new Player(10, 10, 1, "Images/player.png", 20, 1, 2, 2);
+	Player* player = new Player(10, 10, 0, "Images/player.png", 20, 1, 2, 2);
 	Agent* enemy = new Agent(20, 15, 0, "Images/enemy.png", 15, 15);
 	SimpleEnemy* enemy2 = new SimpleEnemy(0, 0, 1, "Images/enemy.png", player, 5, 0, 3, 3);
 

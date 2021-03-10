@@ -29,7 +29,7 @@ MathLibrary::Vector2 WanderBehaviour::calculateForce(Agent* agent)
 	float randNum = rand() % 11 + (-5);
 	float randNum2 = rand() % 11 + (-5);
 
-	//sets the center of the circle to be agents current velocity normalised
+	//sets the center of the circle to be agents current velocity normalized
 	MathLibrary::Vector2 circleCenter = agent->getWorldPosition() + agent->getForward() * agent->getForward().getMagnitude();
 	m_circlePos = circleCenter;
 

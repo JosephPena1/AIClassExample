@@ -110,45 +110,42 @@ void SimpleEnemy::update(float deltaTime)
 	//Create a switch statement for the state machine
 	tag(getTarget());
 
-	//The switch should transition to wander state if the target is not in sight.
-	//You can set wander force to be whatever value you see fit, but be sure to
-	//set the seek force to be 0.
+	int cooldown = 0;
 
-	if (checkTargetInSight())
-		m_currentState;
-
-	/*else
-		m_currentState = WANDER;*/
-
-	//The switch should transition to seek state if the target is in sight.
-	//You can set seek force to be whatever value you see fit, but be sure to
-	//set the wander force to 0.
-
-	switch (m_currentState)
+	if (cooldown <= 0)
 	{
-	case WANDER:
-		m_wander->setForceScale(3);
-		m_pursue->setForceScale(0);
-		m_arrival->setForceScale(0);
-		m_flee->setForceScale(0);
-		break;
+		switch (m_currentState)
+		{
+		case WANDER:
+			m_wander->setForceScale(3);
+			m_pursue->setForceScale(0);
+			m_arrival->setForceScale(0);
+			m_flee->setForceScale(0);
+			cooldown = 10;
+			break;
 
-	case PURSUE:
-		m_pursue->setForceScale(5);
-		m_arrival->setForceScale(3);
-		m_wander->setForceScale(0);
-		m_flee->setForceScale(0);
-		break;
+		case PURSUE:
+			m_pursue->setForceScale(5);
+			m_arrival->setForceScale(3);
+			m_wander->setForceScale(0);
+			m_flee->setForceScale(0);
+			cooldown = 10;
+			break;
 
-	case FLEE:
-		m_flee->setForceScale(3);
-		m_pursue->setForceScale(0);
-		m_arrival->setForceScale(0);
-		m_wander->setForceScale(0);
+		case FLEE:
+			m_flee->setForceScale(3);
+			m_pursue->setForceScale(0);
+			m_arrival->setForceScale(0);
+			m_wander->setForceScale(0);
+			cooldown = 10;
+			break;
 
-	default:
-		break;
+		default:
+			break;
+		}
 	}
+	
+	cooldown--;
 	
 	Enemy::update(deltaTime);
 }
