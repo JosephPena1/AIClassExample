@@ -5,23 +5,27 @@
 
 bool SimpleEnemy::checkTargetInSight()
 {
-	float maxDistance = 8;
+	//Max distance the enemy can see
+	float maxDistance = 12;
 
 	//Check if target is null, return false if true
 	if (!getTarget())
 		return false;
 
+	//The direction the target is in
 	MathLibrary::Vector2 direction = getTarget()->getWorldPosition() - getWorldPosition();
 
+	//gets the length of direction's vector
 	float distance = direction.getMagnitude();
 
-	//Find the dot product of the enemy's forward and the direction vector
+	//Finds the dot product of the enemy's forward and the direction vector
 	float enemyAngle = MathLibrary::Vector2::dotProduct(getForward(), direction.getNormalized());
 
-	//Find the angle using the dot product
+	//Finds the angle using the dot product
 	float angle = acos(MathLibrary::Vector2::findAngle(getForward(), direction.getNormalized()));
 
-	//check if the angle is greater than the Enemy's viewing angle
+	//Checks if the angle is greater than the Enemy's viewing angle 
+	//and if the distance is less than the max distance
 	if (angle > enemyAngle && distance <= maxDistance)
 		return true;
 
@@ -30,6 +34,7 @@ bool SimpleEnemy::checkTargetInSight()
 
 void SimpleEnemy::onCollision(Actor* other)
 {
+	//Checks if the Actor passed in is a Player type
 	Player* player = dynamic_cast<Player*>(other);
 
 	//Checks to see if the enemy ran into the player
@@ -41,7 +46,10 @@ void SimpleEnemy::onCollision(Actor* other)
 
 	//If the player's health is less than 0, set target to nullptr
 	if (player->getHealth() <= 0)
+	{
 		setTarget(nullptr);
+		m_seek->setTarget(nullptr);
+	}
 }
 
 void SimpleEnemy::start()

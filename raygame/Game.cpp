@@ -2,13 +2,13 @@
 #include "raylib.h"
 #include "Player.h"
 #include "Agent.h"
+#include "SimpleEnemy.h"
 #include "SeekBehaviour.h"
 #include "FleeBehaviour.h"
 #include "WanderBehaviour.h"
 #include "PursueBehaviour.h"
 #include "EvadeBehaviour.h"
 #include "ArrivalBehaviour.h"
-#include "SimpleEnemy.h"
 
 bool Game::m_gameOver = false;
 Scene** Game::m_scenes = new Scene*;
@@ -38,9 +38,9 @@ void Game::start()
 	m_camera->zoom = 1;
 
 	//Initialize agents
-	Player* player = new Player(10, 10, 2.5f, "Images/player.png", 200, 200);
-	Agent* enemy = new Agent(20, 15, 1, "Images/enemy.png", 15, 15);
-	SimpleEnemy* enemy2 = new SimpleEnemy(10, 10, 1, "Images/enemy.png", player, 5, 1, 3, 3);
+	Player* player = new Player(10, 10, 0, "Images/player.png", 20, 1, 2, 2);
+	Agent* enemy = new Agent(20, 15, 0, "Images/enemy.png", 15, 15);
+	SimpleEnemy* enemy2 = new SimpleEnemy(0, 0, 0, "Images/enemy.png", player, 5, 0, 3, 3);
 
 	//create a new steering behaviour and add it to the enemy
 	SeekBehaviour* seek = new SeekBehaviour(player, 5);
@@ -53,7 +53,8 @@ void Game::start()
 	enemy->addBehaviour(pursue);
 	enemy->addBehaviour(arrival);
 	enemy2->addBehaviour(wander);
-	enemy2->addBehaviour(seek);
+	enemy2->addBehaviour(pursue);
+	enemy2->addBehaviour(arrival);
 
 	//initialize the sene
 	Scene* scene = new Scene();

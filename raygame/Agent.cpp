@@ -1,6 +1,6 @@
 #include "Agent.h"
-#include "Behaviour.h"
 #include "Game.h"
+#include "Behaviour.h"
 
 Agent::Agent() : Actor()
 {

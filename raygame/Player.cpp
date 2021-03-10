@@ -2,18 +2,18 @@
 #include "Game.h"
 #include "Scene.h"
 #include "raylib.h"
-#include <iostream>
 #include "Bullet.h"
+#include <iostream>
 
-Player::Player(float x, float y, float collisionRadius, const char* spriteFilePath, float maxSpeed, float maxForce) 
-    : Character(x, y, collisionRadius, spriteFilePath, maxSpeed, maxForce)
+Player::Player(float x, float y, float collisionRadius, const char* spriteFilePath, float health, float damage, float maxSpeed, float maxForce) 
+    : Character(x, y, collisionRadius, spriteFilePath, health, damage, maxSpeed, maxForce)
 {
 
 }
 
 void Player::update(float deltatime)
 {
-    //I think inheriting from character messed up some stuff
+    //I think inheriting from character messed up the speed.
 
     int screenWidth = Game::getScreenWidth() / 32;
     int screenHeight = Game::getScreenHeight() / 32;
