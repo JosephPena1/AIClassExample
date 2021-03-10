@@ -38,9 +38,9 @@ void Game::start()
 	m_camera->zoom = 1;
 
 	//Initialize agents
-	Player* player = new Player(10, 10, 5, "Images/player.png", 200, 200);
+	Player* player = new Player(10, 10, 2.5f, "Images/player.png", 200, 200);
 	Agent* enemy = new Agent(20, 15, 1, "Images/enemy.png", 15, 15);
-	SimpleEnemy* enemy2 = new SimpleEnemy(10, 10, 1, "Images/enemy.png", player, 5, 1, 4, 4);
+	SimpleEnemy* enemy2 = new SimpleEnemy(10, 10, 1, "Images/enemy.png", player, 5, 1, 3, 3);
 
 	//create a new steering behaviour and add it to the enemy
 	SeekBehaviour* seek = new SeekBehaviour(player, 5);
