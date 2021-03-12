@@ -3,15 +3,13 @@
 
 enum EnemyState
 {
-	WANDER,
 	PURSUE,
-	FLEE
+	EVADE
 };
 
-class WanderBehaviour;
 class PursueBehaviour;
 class ArrivalBehaviour;
-class FleeBehaviour;
+class EvadeBehaviour;
 
 class SimpleEnemy : public Enemy
 {
@@ -28,10 +26,9 @@ public:
 
 private:
 	EnemyState m_currentState;
-	WanderBehaviour* m_wander;
 	PursueBehaviour* m_pursue;
 	ArrivalBehaviour* m_arrival;
-	FleeBehaviour* m_flee;
+	EvadeBehaviour* m_evade;
 
 	int m_cooldown;
 

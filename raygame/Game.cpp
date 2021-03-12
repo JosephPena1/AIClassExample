@@ -38,24 +38,24 @@ void Game::start()
 	m_camera->zoom = 1;
 
 	//Initialize agents
-	Player* player = new Player(10, 10, 0, "Images/player.png", 20, 1, 2, 2);
+	Player* player = new Player(10, 10, 0, "Images/player.png", 20, 1, 4, 4);
 	Agent* enemy = new Agent(20, 15, 0, "Images/enemy.png", 15, 15);
-	SimpleEnemy* enemy2 = new SimpleEnemy(0, 0, 1, "Images/enemy.png", player, 5, 0, 3, 3);
+	SimpleEnemy* enemy2 = new SimpleEnemy(0, 0, 2, "Images/enemy.png", player, 5, 0, 30, 30);
 
 	//create a new steering behaviour and add it to the enemy
 	SeekBehaviour* seek = new SeekBehaviour(player, 5);
 	FleeBehaviour* flee = new FleeBehaviour(player, 5);
 	WanderBehaviour* wander = new WanderBehaviour(2);
 	PursueBehaviour* pursue = new PursueBehaviour(player, 5);
-	EvadeBehaviour* evade = new EvadeBehaviour(enemy, 5);
+	EvadeBehaviour* evade = new EvadeBehaviour(player, 5);
 	ArrivalBehaviour* arrival = new ArrivalBehaviour(player, 3);
 
-	enemy->addBehaviour(pursue);
-	enemy->addBehaviour(arrival);
+	enemy->addBehaviour(evade);
 	enemy2->addBehaviour(wander);
 	enemy2->addBehaviour(pursue);
 	enemy2->addBehaviour(arrival);
 	enemy2->addBehaviour(flee);
+	enemy2->addBehaviour(evade);
 
 	//initialize the sene
 	Scene* scene = new Scene();

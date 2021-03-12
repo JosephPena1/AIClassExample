@@ -39,7 +39,8 @@ void Agent::update(float deltaTime)
 	int screenWidth = Game::getScreenWidth() / 32;
 	int screenHeight = Game::getScreenHeight() / 32;
 
-	if (getWorldPosition().x > screenWidth)
+	//teleports agent to the opposite side of the window if not inside the window
+	/*if (getWorldPosition().x > screenWidth)
 		setWorldPostion(MathLibrary::Vector2{ 0, getWorldPosition().y });
 	if (getWorldPosition().x < -1)
 		setWorldPostion(MathLibrary::Vector2{ (float)screenWidth, getWorldPosition().y });
@@ -47,7 +48,18 @@ void Agent::update(float deltaTime)
 	if (getWorldPosition().y > screenHeight)
 		setWorldPostion(MathLibrary::Vector2{ getWorldPosition().x, 0 });
 	if (getWorldPosition().y < -1)
-		setWorldPostion(MathLibrary::Vector2{ getWorldPosition().x, (float)screenHeight });
+		setWorldPostion(MathLibrary::Vector2{ getWorldPosition().x, (float)screenHeight });*/
+
+	//keeps agent from going offscreen
+	if (getWorldPosition().x > (screenWidth - .5f))
+		setVelocity(MathLibrary::Vector2{ -1, 0 });
+	if (getWorldPosition().y > (screenHeight - .5f))
+		setVelocity(MathLibrary::Vector2{ 0, -1 });
+
+	if (getWorldPosition().x < .5f)
+		setVelocity(MathLibrary::Vector2{ 1, 0 });
+	if (getWorldPosition().y < .5f)
+		setVelocity(MathLibrary::Vector2{ 0, 1 });
 
 	//Reset force to be zero
 	m_force = { 0, 0 };

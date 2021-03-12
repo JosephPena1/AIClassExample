@@ -27,7 +27,6 @@ MathLibrary::Vector2 WanderBehaviour::calculateForce(Agent* agent)
 
 	//generates two random numbers from -5 to 5
 	float randNum = rand() % 11 + (-5);
-	float randNum2 = rand() % 11 + (-5);
 
 	//sets the center of the circle to be agents current velocity normalized
 	MathLibrary::Vector2 circleCenter = agent->getWorldPosition() + agent->getForward() * agent->getForward().getMagnitude();
@@ -35,7 +34,7 @@ MathLibrary::Vector2 WanderBehaviour::calculateForce(Agent* agent)
 
 	//creates two random variables to make the offset
 	float x = radian * cos(randNum);
-	float y = radian * sin(randNum2);
+	float y = radian * sin(randNum);
 	MathLibrary::Vector2 offset = {x, y};
 
 	//creates a random target in the circle
@@ -56,6 +55,7 @@ MathLibrary::Vector2 WanderBehaviour::calculateForce(Agent* agent)
 
 void WanderBehaviour::draw(Agent* agent)
 {
+	//failed attempt at drawing
 	DrawCircle(m_circlePos.x * 32, m_circlePos.y * 32, m_circleRadius * 32, BLUE);
 	DrawLine(m_circlePos.x * 32, m_circlePos.y * 32, m_targetPos.x * 32, m_targetPos.y * 32, RED);
 }

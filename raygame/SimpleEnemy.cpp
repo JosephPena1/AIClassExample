@@ -2,9 +2,8 @@
 #include <iostream>
 #include "Player.h"
 #include "PursueBehaviour.h"
-#include "WanderBehaviour.h"
 #include "ArrivalBehaviour.h"
-#include "FleeBehaviour.h"
+#include "EvadeBehaviour.h"
 
 bool SimpleEnemy::checkTargetInSight()
 {
@@ -51,11 +50,11 @@ void SimpleEnemy::tag(Actor* other)
 		{
 			switch (m_currentState)
 			{
-			case FLEE:
+			case EVADE:
 				m_currentState = PURSUE;
 				break;
 			case PURSUE:
-				m_currentState = FLEE;
+				m_currentState = EVADE;
 				break;
 			}
 		}
@@ -84,7 +83,7 @@ void SimpleEnemy::onCollision(Actor* other)
 		setTarget(nullptr);
 		m_pursue->setTarget(nullptr);
 		m_arrival->setTarget(nullptr);
-		m_flee->setTarget(nullptr);
+		m_evade->setTarget(nullptr);
 	}
 }
 
@@ -97,10 +96,9 @@ void SimpleEnemy::start()
 	m_currentState = PURSUE;
 
 	//Initialize member variables
-	m_wander = getBehaviour<WanderBehaviour>();
 	m_pursue = getBehaviour<PursueBehaviour>();
 	m_arrival = getBehaviour<ArrivalBehaviour>();
-	m_flee = getBehaviour<FleeBehaviour>();
+	m_evade = getBehaviour<EvadeBehaviour>();
 
 	//Set the target to be the base class target
 	setTarget(Enemy::getTarget());
@@ -117,28 +115,18 @@ void SimpleEnemy::update(float deltaTime)
 	{
 		switch (m_currentState)
 		{
-		case WANDER:
-			m_wander->setForceScale(3);
-			m_pursue->setForceScale(0);
-			m_arrival->setForceScale(0);
-			m_flee->setForceScale(0);
-			m_cooldown = 20;
-			break;
-
 		case PURSUE:
-			m_pursue->setForceScale(5);
-			m_arrival->setForceScale(3);
-			m_wander->setForceScale(0);
-			m_flee->setForceScale(0);
-			m_cooldown = 20;
+			m_pursue->setForceScale(50);
+			m_arrival->setForceScale(30);
+			m_evade->setForceScale(0);
+			m_cooldown = 120;
 			break;
 
-		case FLEE:
-			m_flee->setForceScale(3);
+		case EVADE:
+			m_evade->setForceScale(5);
 			m_pursue->setForceScale(0);
 			m_arrival->setForceScale(0);
-			m_wander->setForceScale(0);
-			m_cooldown = 20;
+			m_cooldown = 120;
 			break;
 
 		default:
@@ -156,5 +144,5 @@ void SimpleEnemy::setTarget(Actor* target)
 	Enemy::setTarget(target);
 	m_pursue->setTarget(target);
 	m_arrival->setTarget(target);
-	m_flee->setTarget(target);
+	m_evade->setTarget(target);
 }
