@@ -1,14 +1,21 @@
 #include "Game.h"
 #include "raylib.h"
 #include "Player.h"
-#include "Agent.h"
 #include "SimpleEnemy.h"
+#include "ComplexEnemy.h"
 #include "SeekBehaviour.h"
 #include "FleeBehaviour.h"
 #include "WanderBehaviour.h"
 #include "PursueBehaviour.h"
 #include "EvadeBehaviour.h"
 #include "ArrivalBehaviour.h"
+
+#include "DecisionBehaviour.h"
+#include "PursueDecision.h"
+#include "EvadeDecision.h"
+#include "WanderDecision.h"
+#include "CheckHealth.h"
+#include "SeePlayer.h"
 
 bool Game::m_gameOver = false;
 Scene** Game::m_scenes = new Scene*;
@@ -38,9 +45,10 @@ void Game::start()
 	m_camera->zoom = 1;
 
 	//Initialize agents
-	Player* player = new Player(10, 10, 0, "Images/player.png", 20, 1, 4, 4);
-	Agent* enemy = new Agent(20, 15, 0, "Images/enemy.png", 15, 15);
-	SimpleEnemy* enemy2 = new SimpleEnemy(0, 0, 2, "Images/enemy.png", player, 5, 0, 30, 30);
+	Player* player = new Player(10, 10, 0, "Images/player.png", 200, 1, 4, 4);
+	Enemy* enemy = new Enemy(0, 0, 2, "Images/enemy.png", player, 5, 0, 30, 30);
+	SimpleEnemy* simpleEnemy = new SimpleEnemy(0, 0, 2, "Images/enemy.png", player, 5, 0, 30, 30);
+	ComplexEnemy* complexEnemy = new ComplexEnemy(0, 0, 2, "Images/enemy.png", player, 2, 0, 30, 30);
 
 	//create a new steering behaviour and add it to the enemy
 	SeekBehaviour* seek = new SeekBehaviour(player, 5);
@@ -50,18 +58,33 @@ void Game::start()
 	EvadeBehaviour* evade = new EvadeBehaviour(player, 5);
 	ArrivalBehaviour* arrival = new ArrivalBehaviour(player, 3);
 
+	//Creates new decisions and adds it to enemy
+	EvadeDecision* evadeDecision = new EvadeDecision();
+	PursueDecision* pursueDecision = new PursueDecision();
+	WanderDecision* wanderDecision = new WanderDecision();
+	SeePlayer* seePlayerDecision = new SeePlayer(pursueDecision, wanderDecision);
+	CheckHealth* checkHealthDecision = new CheckHealth(evadeDecision, seePlayerDecision);
+	DecisionBehaviour* decisionBehaviour = new DecisionBehaviour(checkHealthDecision);
+	
+
 	enemy->addBehaviour(evade);
-	enemy2->addBehaviour(wander);
-	enemy2->addBehaviour(pursue);
-	enemy2->addBehaviour(arrival);
-	enemy2->addBehaviour(flee);
-	enemy2->addBehaviour(evade);
+	simpleEnemy->addBehaviour(wander);
+	simpleEnemy->addBehaviour(pursue);
+	simpleEnemy->addBehaviour(arrival);
+	simpleEnemy->addBehaviour(flee);
+	simpleEnemy->addBehaviour(evade);
+
+	complexEnemy->addBehaviour(decisionBehaviour);
+	complexEnemy->addBehaviour(pursue);
+	complexEnemy->addBehaviour(evade);
+	complexEnemy->addBehaviour(wander);
 
 	//initialize the sene
 	Scene* scene = new Scene();
 	scene->addActor(player);
 	//scene->addActor(enemy);
-	scene->addActor(enemy2);
+	//scene->addActor(simpleEnemy);
+	scene->addActor(complexEnemy);
 	addScene(scene);
 
 	SetTargetFPS(60);
@@ -70,9 +93,7 @@ void Game::start()
 void Game::update(float deltaTime)
 {
 	for (int i = 0; i < m_sceneCount; i++)
-	{
 		m_scenes[i]->update(deltaTime);
-	}
 }
 
 void Game::draw()
@@ -83,9 +104,7 @@ void Game::draw()
 	ClearBackground(BLACK);
 
 	for (int i = 0; i < m_sceneCount; i++)
-	{
 		m_scenes[i]->draw();
-	}
 
 	EndMode2D();
 	EndDrawing();
@@ -144,9 +163,7 @@ int Game::addScene(Scene* scene)
 
 	//Copy values from old array into new array
 	for (int i = 0; i < m_sceneCount; i++)
-	{
 		tempArray[i] = m_scenes[i];
-	}
 
 	//Store the current index
 	int index = m_sceneCount;
@@ -182,9 +199,7 @@ bool Game::removeScene(Scene* scene)
 			j++;
 		}
 		else
-		{
 			sceneRemoved = true;
-		}
 	}
 
 	//If the scene was successfully removed set the old array to be the new array
