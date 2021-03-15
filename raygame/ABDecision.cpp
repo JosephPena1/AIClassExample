@@ -24,3 +24,9 @@ void ABDecision::makeDecision(Agent* agent, float deltaTime)
 			m_rightChild->makeDecision(agent, deltaTime);
 	}
 }
+
+bool ABDecision::checkCondition(Agent* agent, float deltaTime)
+{
+
+	return false;
+}

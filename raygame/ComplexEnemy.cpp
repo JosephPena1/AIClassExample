@@ -20,36 +20,6 @@ void ComplexEnemy::start()
 
 void ComplexEnemy::update(float deltaTime)
 {
-	//Idea of what it should do every update
-	/*if (getHealth() < 2)
-	{
-		getEvade()->setEnabled(true);
-		getWander()->setEnabled(false);
-		getPursue()->setEnabled(false);
-		getEvade()->setForceScale(3);
-		getWander()->setForceScale(0);
-		getPursue()->setForceScale(0);
-	}
-
-	if (checkTargetInSight(1))
-	{
-		getPursue()->setEnabled(true);
-		getWander()->setEnabled(false);
-		getEvade()->setEnabled(false);
-		getPursue()->setForceScale(3);
-		getWander()->setForceScale(0);
-		getEvade()->setForceScale(0);
-	}
-	else
-	{
-		getWander()->setEnabled(true);
-		getPursue()->setEnabled(false);
-		getEvade()->setEnabled(false);
-		getWander()->setForceScale(3);
-		getPursue()->setForceScale(0);
-		getEvade()->setForceScale(0);
-	}*/
-
 	Enemy::update(deltaTime);
 }
 
