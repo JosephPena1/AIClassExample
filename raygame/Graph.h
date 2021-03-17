@@ -11,6 +11,11 @@ public:
 	void draw() override;
 	void update(float deltaTime) override;
 
+	void BFS(int startX, int startY, int goalX, int goalY);
+	void dijkstrapBFS(int startX, int startY, int goalX, int goalY);
+
+	Node* getNode(int xPos, int yPos);
+
 private:
 	void createGraph(int nodeSize, int nodeSpacing);
 
