@@ -95,10 +95,9 @@ void Graph::dijkstrapBFS(int startX, int startY, int goalX, int goalY)
 	Node* goal = getNode(goalX, goalY);
 
 	//Check if the start or the goal pointer is null
-	//return an empty list
+	//and returns an empty list
 	if (!start || !goal)
 		return;
-	//end if statement
 
 	//Set the start nodes color to be green
 	start->color = ColorToInt(GREEN);
@@ -116,8 +115,7 @@ void Graph::dijkstrapBFS(int startX, int startY, int goalX, int goalY)
 	//Loop while the open list is not empty
 	while (!openList.empty())
 	{
-		//Sort the items in the open list by the g score
-
+		//Sort the items in the open list by the g score (using cost from edge class)
 
 		//Set the iterator to be the first item in the open list
 		currentNode = openList[0];
@@ -129,10 +127,11 @@ void Graph::dijkstrapBFS(int startX, int startY, int goalX, int goalY)
 			currentNode->color = ColorToInt(YELLOW);
 			//Return the new path found
 		}
-		//end if statement
 
 		//Pop the first item off the open list
+		openList.pop_front();
 		//Add the first item to the closed list
+		closedList.push_back(currentNode);
 
 		//Loop through all of the edges for the iterator
 		for (int i = 0; i < currentNode->edges.size(); i++)
@@ -141,24 +140,23 @@ void Graph::dijkstrapBFS(int startX, int startY, int goalX, int goalY)
 			Node* currentEdgeEnd = nullptr;
 
 			//Check if the iterator is on the second end of the node
+			//Set the edge end pointer to be the first end of the node
 			if (currentNode == currentNode->edges[i]->connectedNode2)
-				//Set the edge end pointer to be the first end of the node
 				currentEdgeEnd = currentNode->edges[i]->connectedNode1;
 
 			//Otherwise if the iterator is on the first end of the node...
+			//set the edge end pointer to be the second end of the node
 			else
-				//set the edge end pointer to be the second end of the node
 				currentEdgeEnd = currentNode->edges[i]->connectedNode2;
-			// end if statement
 
 			//Check if node at the end of the edge is in the closed list
-			if ()
+			if (currentEdgeEnd)
 			{
 				//Create an int and set it to be the g score of the iterator plus the cost of the edge
+				int gScoreTotal = currentNode->edges[i]->cost + currentEdgeEnd->edges[i]->cost; //?
 
-
-				//Check if the node at the end ofthe edge is in the open list
-				if ()
+				//Check if the node at the end of the edge is in the open list
+				if (currentEdgeEnd)
 				{
 					//Mark the node as visited by changing its color
 					//Set the nodes g score to be the g score calculated earlier
@@ -170,12 +168,13 @@ void Graph::dijkstrapBFS(int startX, int startY, int goalX, int goalY)
 				else
 				{
 					//Mark the node as visited by changing its color
+					currentEdgeEnd->color = ColorToInt(RED);
+					currentEdgeEnd->visited = true;
 					//Set its g score to be the g score calculated earlier
+					currentEdgeEnd->gScore = gScoreTotal;
 					//Set its previous to be the current node
 				}
-				//end if statement
 			}
-			//end if statement
 		}
 		//end loop
 	}
