@@ -17,6 +17,8 @@
 #include "CheckHealth.h"
 #include "SeePlayer.h"
 
+#include "Graph.h"
+
 bool Game::m_gameOver = false;
 Scene** Game::m_scenes = new Scene*;
 int Game::m_sceneCount = 0;
@@ -44,6 +46,7 @@ void Game::start()
 	m_camera->target = { (float)m_screenWidth / 2, (float)m_screenHeight / 2 };
 	m_camera->zoom = 1;
 
+	//STEERING BEHAVIOURS SCENE START
 	//Initialize agents
 	Player* player = new Player(10, 10, 0, "Images/player.png", 200, 1, 4, 4);
 	Enemy* enemy = new Enemy(0, 0, 2, "Images/enemy.png", player, 5, 0, 30, 30);
@@ -79,6 +82,16 @@ void Game::start()
 	complexEnemy->addBehaviour(evade);
 	complexEnemy->addBehaviour(wander);
 
+	//STEERING BEHAVIOURS SCENE END
+
+	//PATHFINDING SCENE START
+	Graph* graph = new Graph(5, 5, 3, 1);
+
+	Scene* pathFinding = new Scene();
+	pathFinding->addActor(graph);
+
+	//PATHFINDING SCENE START
+
 	//initialize the sene
 	Scene* scene = new Scene();
 	scene->addActor(player);
@@ -87,13 +100,14 @@ void Game::start()
 	scene->addActor(complexEnemy);
 	addScene(scene);
 
+	m_currentSceneIndex = addScene(pathFinding);
+
 	SetTargetFPS(60);
 }
 
 void Game::update(float deltaTime)
 {
-	for (int i = 0; i < m_sceneCount; i++)
-		m_scenes[i]->update(deltaTime);
+	getCurrentScene()->update(deltaTime);
 }
 
 void Game::draw()
@@ -103,8 +117,7 @@ void Game::draw()
 	BeginMode2D(*m_camera);
 	ClearBackground(BLACK);
 
-	for (int i = 0; i < m_sceneCount; i++)
-		m_scenes[i]->draw();
+	getCurrentScene()->draw();
 
 	EndMode2D();
 	EndDrawing();

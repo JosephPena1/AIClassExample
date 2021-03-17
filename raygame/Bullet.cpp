@@ -21,6 +21,8 @@ void Bullet::onCollision(Actor* other)
 {
 	Player* player = dynamic_cast<Player*>(other);
 
+	//If not player and other is not this
+	//destroys other and this
 	if (!player && other != this)
 	{
 		Game::destroy(other);

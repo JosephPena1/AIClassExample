@@ -36,6 +36,12 @@
     <Filter Include="Source Files\AI\Decisions">
       <UniqueIdentifier>{9902ef46-9da8-45fc-a756-1c92fd2f727e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Graph">
+      <UniqueIdentifier>{bd6a929f-c20a-4afd-9be9-1b2cd2b1e923}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Graph">
+      <UniqueIdentifier>{eadddb2f-fe32-4470-b524-7966d836a300}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -112,6 +118,15 @@
     </ClCompile>
     <ClCompile Include="CheckHealth.cpp">
       <Filter>Source Files\AI\Decisions</Filter>
+    </ClCompile>
+    <ClCompile Include="Edge.cpp">
+      <Filter>Source Files\Graph</Filter>
+    </ClCompile>
+    <ClCompile Include="Node.cpp">
+      <Filter>Source Files\Graph</Filter>
+    </ClCompile>
+    <ClCompile Include="Graph.cpp">
+      <Filter>Source Files\Graph</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -195,6 +210,15 @@
     </ClInclude>
     <ClInclude Include="CheckHealth.h">
       <Filter>Header Files\AI\Decisions</Filter>
+    </ClInclude>
+    <ClInclude Include="Edge.h">
+      <Filter>Header Files\Graph</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>Header Files\Graph</Filter>
+    </ClInclude>
+    <ClInclude Include="Graph.h">
+      <Filter>Header Files\Graph</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
