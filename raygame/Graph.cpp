@@ -115,7 +115,15 @@ void Graph::dijkstrapBFS(int startX, int startY, int goalX, int goalY)
 	//Loop while the open list is not empty
 	while (!openList.empty())
 	{
-		//Sort the items in the open list by the g score (using cost from edge class)
+		//Sort the items in the open list by the g score (using cost from edge class I think?)
+		for (int i = 0; i < openList.size(); i++)
+			for (int j = openList.size() - 1; j > i; j--)
+				if (openList[j] <= openList[j - 1])
+				{
+					Node* temp = openList[j];
+					openList[j] = openList[j - 1];
+					openList[j - 1] = temp;
+				}
 
 		//Set the iterator to be the first item in the open list
 		currentNode = openList[0];
@@ -150,18 +158,35 @@ void Graph::dijkstrapBFS(int startX, int startY, int goalX, int goalY)
 				currentEdgeEnd = currentNode->edges[i]->connectedNode2;
 
 			//Check if node at the end of the edge is in the closed list
-			if (currentEdgeEnd)
+			bool inList = false;
+
+			for (int j = 0; j < closedList.size(); j++)
+				if (currentEdgeEnd == closedList[j])
+					inList = true;
+
+			if (!inList)
 			{
+				inList = false;
+
 				//Create an int and set it to be the g score of the iterator plus the cost of the edge
-				int gScoreTotal = currentNode->edges[i]->cost + currentEdgeEnd->edges[i]->cost; //?
+				int gScoreTotal = currentNode->edges[i]->cost + currentEdgeEnd->edges[i]->cost;
+
+				for (int j = 0; j < openList.size(); j++)
+					if (currentEdgeEnd == openList[j])
+						inList = true;
 
 				//Check if the node at the end of the edge is in the open list
-				if (currentEdgeEnd)
+				if (inList)
 				{
 					//Mark the node as visited by changing its color
+					currentEdgeEnd->color = ColorToInt(RED);
+					currentEdgeEnd->visited = true;
 					//Set the nodes g score to be the g score calculated earlier
+					currentEdgeEnd->edges[i]->cost = gScoreTotal;
 					//Set the nodes previous to be the iterator
+					currentEdgeEnd->setPrevious(currentNode);
 					//Add the node to the open list
+					openList.push_back(currentEdgeEnd);
 				}
 
 				//Otherwise if the g score is less than the node at the end of the edge's g score...
@@ -171,8 +196,9 @@ void Graph::dijkstrapBFS(int startX, int startY, int goalX, int goalY)
 					currentEdgeEnd->color = ColorToInt(RED);
 					currentEdgeEnd->visited = true;
 					//Set its g score to be the g score calculated earlier
-					currentEdgeEnd->gScore = gScoreTotal;
+					currentEdgeEnd->edges[i]->cost = gScoreTotal;
 					//Set its previous to be the current node
+					currentEdgeEnd->setPrevious(currentNode);
 				}
 			}
 		}

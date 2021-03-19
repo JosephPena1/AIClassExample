@@ -13,8 +13,11 @@ public:
 	int color = 0xFFFFFFFF;
 	int size = 1;
 	bool visited;
-	int gScore;
 	void draw() override;
 	void update(float deltaTime) override;
+	void setPrevious(Node* previous) { m_previous = previous; }
+	Node* getPrevious() { return m_previous; };
 
+private:
+	Node* m_previous;
 };
