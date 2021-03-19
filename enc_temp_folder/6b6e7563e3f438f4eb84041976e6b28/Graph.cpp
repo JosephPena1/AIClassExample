@@ -157,9 +157,9 @@ void Graph::dijkstrapBFS(int startX, int startY, int goalX, int goalY)
 			else
 				currentEdgeEnd = currentNode->edges[i]->connectedNode2;
 
-			//Sets every node's previous at the end of edge to currentNode
-			for (int j = 0; j < currentNode->edges.size(); j++)
-				currentNode->edges[j]->connectedNode2->setPrevious(currentNode);
+			currentNode->edges[i]->connectedNode1->setPrevious(currentNode);
+
+			currentEdgeEnd->setPrevious(currentNode);
 
 			bool inList = false;
 
