@@ -12,7 +12,9 @@ public:
 	void update(float deltaTime) override;
 
 	void BFS(int startX, int startY, int goalX, int goalY);
-	void dijkstrapBFS(int startX, int startY, int goalX, int goalY);
+	void dijkstra(int startX, int startY, int goalX, int goalY);
+	void aStar(int startX, int startY, int goalX, int goalY);
+	float heuristic(Node* current, Node* goal);
 
 	Node* getNode(int xPos, int yPos);
 

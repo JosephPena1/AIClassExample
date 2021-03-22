@@ -13,6 +13,9 @@ public:
 	int color = 0xFFFFFFFF;
 	int size = 1;
 	bool visited;
+	float gScore;
+	float hScore;
+	float fScore;
 	void draw() override;
 	void update(float deltaTime) override;
 	void setPrevious(Node* previous) { m_previous = previous; }
